@@ -1,0 +1,16 @@
+appdirs==1.4.0
+diff-match-patch==20121119
+Django==1.10.5
+django-appconf==1.0.2
+django-fontawesome==0.3.1
+django-geoposition==0.3.0
+django-import-export==0.5.1
+freeze==1.0.10
+olefile==0.44
+packaging==16.8
+Pillow==4.0.0
+psycopg2==2.6.2
+pyparsing==2.1.10
+PyYAML==3.12
+six==1.10.0
+tablib==0.11.4
