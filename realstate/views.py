@@ -2,7 +2,7 @@ from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.views.generic import TemplateView
 from django.http import HttpResponseRedirect
 from realstate.models import *
-from realstate.send_email import send
+from django.core.mail import EmailMessage
 
 
 def inicio(request):
@@ -54,6 +54,9 @@ class enviar_mail(TemplateView):
                                                                      request.POST.get('name', ''),
                                                                      request.POST.get('from_email', ''),
                                                                      request.POST.get('contact-number', ''))
-        from_email = request.POST.get('from_email', '')
-        to_email = 'jwgarcia003@gmail.com'
-        return send(request, subject, message, from_email, to_email)
+        email = EmailMessage(subject, message, to = ['cesarabel@deltacopiers.com', 'jwgarcia003@gmail.com'])
+        email.send()
+
+
+
+
