@@ -16,54 +16,13 @@ class index(TemplateView):
         context = self.get_context_data()
 
         page = request.GET.get('page', 1)
-        # pr_location = request.GET.get('location', 'any')
-        # pr_type = request.GET.get('type', 'any')
-        # pr_status = request.GET.get('status', 'any')
-        # pr_bedrooms = request.GET.get('bedrooms', 'any')
-        # pr_bathrooms = request.GET.get('bathrooms', 'any')
-        # pr_min_price = request.GET.get('min-price', 'any')
-        # pr_max_price = request.GET.get('max-price', 'any')
-        # pr_keyword = request.GET.get('keyword')
-        #
-        # location = Departamento.objects.filter(nombre__contains=pr_location)
-        #
-        # if location and not type=='any' and not pr_status=='any' and not pr_bedrooms=='any' and not pr_bathrooms=='any' and not pr_min_price=='any' and not pr_max_price=='any' and pr_keyword:
-        #     propiedades_list = Propiedad.objects.filter(localidad__municipio__departamento=location,
-        #                                                 estado_negocio=pr_status,
-        #                                                 habitaciones=pr_bedrooms,
-        #                                                 banios=pr_bathrooms,
-        #                                                 valor_gte=pr_min_price,
-        #                                                 valor__lte=pr_max_price,
-        #                                                 nombre__contains=pr_keyword)
-        # elif location and not type=='any' and not pr_status=='any' and not pr_bedrooms=='any' and not pr_bathrooms=='any' and not pr_min_price=='any' and not pr_max_price=='any':
-        #     propiedades_list = Propiedad.objects.filter(localidad__municipio__departamento=location,
-        #                                                 estado_negocio=pr_status,
-        #                                                 habitaciones=pr_bedrooms,
-        #                                                 banios=pr_bathrooms,
-        #                                                 valor_gte=pr_min_price,
-        #                                                 valor__lte=pr_max_price,)
-        # elif location and not type == 'any' and not pr_status == 'any' and not pr_bedrooms == 'any' and not pr_bathrooms == 'any' and not pr_min_price == 'any':
-        #     propiedades_list = Propiedad.objects.filter(localidad__municipio__departamento=location,
-        #                                                 estado_negocio=pr_status,
-        #                                                 habitaciones=pr_bedrooms,
-        #                                                 banios=pr_bathrooms,
-        #                                                 valor_gte=pr_min_price,)
-        # elif location and not type == 'any' and not pr_status == 'any' and not pr_bedrooms == 'any' and not pr_bathrooms == 'any':
-        #     propiedades_list = Propiedad.objects.filter(localidad__municipio__departamento=location,
-        #                                                 estado_negocio=pr_status,
-        #                                                 habitaciones=pr_bedrooms,
-        #                                                 banios=pr_bathrooms,)
-        # elif location and not type == 'any' and not pr_status == 'any' and not pr_bedrooms == 'any':
-        #     propiedades_list = Propiedad.objects.filter(localidad__municipio__departamento=location,
-        #                                                 estado_negocio=pr_status,
-        #                                                 habitaciones=pr_bedrooms,)
-        # elif location and not type == 'any' and not pr_status == 'any':
-        #     propiedades_list = Propiedad.objects.filter(localidad__municipio__departamento=location,
-        #                                                 estado_negocio=pr_status,)
-        # elif location and not type == 'any' and not pr_status == 'any':
-        #     propiedades_list = Propiedad.objects.filter(localidad__municipio__departamento=location,)
 
         propiedades_list = Propiedad.objects.all()
+
+        for k,vals in request.GET.lists():
+            for v in vals:
+                if not k == 'page':
+                    propiedades_list = propiedades_list.filter(**{k: v})
 
         paginator = Paginator(propiedades_list, 3)
         try:

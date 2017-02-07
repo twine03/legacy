@@ -41,7 +41,7 @@ class Propietario_admin(admin.ModelAdmin):
         }),
     )
     inlines = [propietario_contacto]
-    
+
 admin.site.register(Propietario, Propietario_admin)
 
 class propiedad_galeria(base_tabular):
@@ -65,10 +65,10 @@ class Propiedad_admin(admin.ModelAdmin):
                 ('nombre', 'propietario',),
                 ('area','habitaciones','banios',),
                 ('cochera','plantas', 'pisina',),
+                ('portada', 'localidad'),
                 ('estado_negocio','valor'),
                 ('direccion'),
                 ('descripcion'),
-                ('portada'),
                 ('position'),
             ),
         }),

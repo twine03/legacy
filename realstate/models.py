@@ -41,6 +41,8 @@ class Localidad(models.Model):
     def __unicode__(self):
         return "%s - %s" % (self.municipio, self.nombre)
 
+    class Meta:
+        verbose_name_plural = "localidades"
 
 
 
@@ -129,6 +131,9 @@ class Propiedad(models.Model):
 
     def extras(self):
         return Propiedad_Extra.objects.filter(propiedad=self)
+
+    class Meta:
+        verbose_name_plural = "propiedades"
 
 # region GALERIA
 class Galeria(models.Model):
