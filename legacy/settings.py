@@ -156,3 +156,10 @@ EMAIL_PORT = 465
 
 #This did the trick
 DEFAULT_FROM_EMAIL = EMAIL_HOST_USER
+
+# Variables para el envio por gmail
+EMAIL_USE_TLS = True
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_HOST_USER = 'xangcastle@gmail.com'
+EMAIL_HOST_PASSWORD = 'ABcq12!@'
+EMAIL_PORT = 587
