@@ -7,8 +7,12 @@ import realstate
 from django.db import models
 from django.db.models import Sum, Max
 from django.contrib.auth.models import User
+from django.http import HttpResponse
 from fontawesome.fields import IconField
 from geoposition.fields import GeopositionField
+import json
+from django.core import serializers
+
 
 
 def format_fecha(fecha):
@@ -99,17 +103,17 @@ class Propietario_Contacto(models.Model):
 
 
 class Propiedad(models.Model):
-    localidad = models.ForeignKey(Localidad, null=False, blank=False)
+    localidad = models.ForeignKey(Localidad, null=True, blank=True)
     direccion = models.TextField(max_length=500)
     position = GeopositionField(null=True, blank=True)
     nombre = models.CharField(max_length=100, null=False, blank=False)
-    area = models.FloatField()
-    habitaciones = models.IntegerField()
-    pisina = models.BooleanField()
-    cochera = models.IntegerField(default=0)
-    banios = models.FloatField(default=0)
-    plantas = models.IntegerField(default=1)
-    propietario = models.ForeignKey(Propietario, null=False, blank=False)
+    area = models.FloatField(null=True, blank=True)
+    habitaciones = models.IntegerField(null=True, blank=True)
+    pisina = models.NullBooleanField(null=True, blank=True)
+    cochera = models.IntegerField(default=0, null=True, blank=True)
+    banios = models.FloatField(default=0, null=True, blank=True)
+    plantas = models.IntegerField(default=1, null=True, blank=True)
+    propietario = models.ForeignKey(Propietario, null=True, blank=True)
     #galerias = models.ManyToManyField(Galeria, null=True, blank=True)
     ESTADOS_NEGOCIO = (('PARA RENTA', 'PARA RENTA'),
                        ('PARA VENTA', 'PARA VENTA'),
@@ -148,7 +152,7 @@ class Galeria(models.Model):
 class Foto(models.Model):
     #galeria = models.ForeignKey(Galeria, null=True, blank=True)
     propiedad = models.ForeignKey(Propiedad, null=True, blank=True)
-    foto = models.ImageField(upload_to=get_media_url, null=True)
+    foto = models.ImageField(upload_to=get_media_url, null=True, blank=True)
 
 class Propiedad_Extra(models.Model):
     propiedad = models.ForeignKey(Propiedad, null=True, blank=True)
